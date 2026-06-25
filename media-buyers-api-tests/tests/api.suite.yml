@@ -1,0 +1,12 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+              url: '%API_BASE_URL%'
+              depends: PhpBrowser
+        - Asserts
+        - Tests\Support\Helper\Api:
+              depends: REST
+    config:
+        REST:
+            timeout: 30
