@@ -57,13 +57,13 @@ tests/
 | **Uniqueness** (P11) | Yes | Data integrity; two-step flow documents stateful behaviour. |
 | *Pagination, auth, PATCH/DELETE, performance* | No | Out of contract scope. |
 
-**Test count:** 4 GET tests + 11 POST test methods (several parameterized) = **15+ executable cases**, exceeding the minimum of 8.
+**Test count:** 4 GET tests + 11 POST test methods (several parameterized)
 
 ## Abstractions and what they buy at scale
 
 1. **`MediaBuyersApiClient`** — Single place for paths, verbs, and headers. When the contract adds `/api/v2/mediabuyers`, update one class.
 2. **`CreateMediaBuyerRequestBuilder`** — No inline JSON in tests; fluent methods express intent (`withInvalidEmail()`, `withoutName()`). New fields get one builder method, not N test edits.
-3. **`JsonSchemaValidator` + schema files** — Success responses validated against the same artifacts reviewers provided. Schema drift is visible in PR diffs.
+3. **`JsonSchemaValidator` + schema files** — Success responses validated against the provided artifacts. Schema drift is visible in PR diffs.
 4. **`Api` helper** — Cross-cutting assertions (error `detail` matching, email/active/id rules) stay out of Cest methods.
 5. **`tests/_data/*.php`** — Parameterized boundaries (missing fields, name lengths, active mapping) stay data-driven for easy extension.
 
